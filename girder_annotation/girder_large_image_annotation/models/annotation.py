@@ -72,6 +72,11 @@ class AnnotationSchema(object):
                    r'rgba\(\d+,\s*\d+,\s*\d+,\s*(\d?\.|)\d+\))$'
     }
 
+    userSchema = {
+        'type': 'object',
+        'additionalProperties': True
+    }
+    
     baseShapeSchema = {
         '$schema': 'http://json-schema.org/schema#',
         'id': '/girder/plugins/large_image/models/base_shape',
@@ -82,6 +87,8 @@ class AnnotationSchema(object):
                 'pattern': '^[0-9a-f]{24}$',
             },
             'type': {'type': 'string'},
+            # schema free field for users to extend annotations
+            'user': userSchema,
             'label': {
                 'type': 'object',
                 'properties': {
@@ -96,7 +103,7 @@ class AnnotationSchema(object):
                         'minimum': 0,
                         'exclusiveMinimum': True,
                     },
-                    'color': colorSchema,
+                    'color': colorSchema
                 },
                 'required': ['value'],
                 'additionalProperties': False
