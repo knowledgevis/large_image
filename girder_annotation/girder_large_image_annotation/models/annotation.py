@@ -14,7 +14,7 @@
 #  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
-##############################################################################
+#############################################################################
 
 from bson import ObjectId
 import cherrypy
@@ -72,6 +72,11 @@ class AnnotationSchema(object):
                    r'rgba\(\d+,\s*\d+,\s*\d+,\s*(\d?\.|)\d+\))$'
     }
 
+    userSchema = {
+        'type': 'object',
+        'additionalProperties': True
+    }
+    
     baseShapeSchema = {
         '$schema': 'http://json-schema.org/schema#',
         'id': '/girder/plugins/large_image/models/base_shape',
@@ -82,6 +87,8 @@ class AnnotationSchema(object):
                 'pattern': '^[0-9a-f]{24}$',
             },
             'type': {'type': 'string'},
+            # schema free field for users to extend annotations
+            'user': userSchema,
             'label': {
                 'type': 'object',
                 'properties': {
