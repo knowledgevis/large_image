@@ -49,6 +49,11 @@ def getTileSourceFromDict(availableSources, pathOrUri, *args, **kwargs):
     uriWithoutProtocol = pathOrUri.split('://', 1)[-1]
     isLargeImageUri = pathOrUri.startswith('large_image://')
     extensions = [ext.lower() for ext in os.path.basename(uriWithoutProtocol).split('.')[1:]]
+
+    # CRL inserted to force recognition of SVS files when name without extensions is received
+    if len(extensions)==0:
+        extensions = ['svs']
+    print('extensions:',extensions)
     sourceList = []
     for sourceName in availableSources:
         sourceExtensions = availableSources[sourceName].extensions
@@ -76,6 +81,7 @@ def getTileSource(*args, **kwargs):
     """
     if not len(AvailableTileSources):
         loadTileSources()
+    print('available tile sources:',AvailableTileSources)
     return getTileSourceFromDict(AvailableTileSources, *args, **kwargs)
 
 

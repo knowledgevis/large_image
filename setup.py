@@ -15,8 +15,8 @@ extraReqs = {
 }
 sources = {
     'dummy': ['large-image-source-dummy'],
-    'gdal': ['large-image-source-gdal'],
-    'mapnik': ['large-image-source-mapnik'],
+    #'gdal': ['large-image-source-gdal'],
+    #'mapnik': ['large-image-source-mapnik'],
     'nd2': ['large-image-source-nd2'],
     'ometiff': ['large-image-source-ometiff'],
     'openjpeg': ['large-image-source-openjpeg'],
@@ -25,10 +25,10 @@ sources = {
     'tiff': ['large-image-source-tiff'],
     'test': ['large-image-source-test'],
 }
-if sys.version_info >= (3, ):
-    sources.update({
-        'bioformats': ['large-image-source-bioformats'],
-    })
+#if sys.version_info >= (3, ):
+#    sources.update({
+#        'bioformats': ['large-image-source-bioformats'],
+#    })
 extraReqs.update(sources)
 extraReqs['sources'] = list(set(itertools.chain.from_iterable(sources.values())))
 extraReqs['all'] = list(set(itertools.chain.from_iterable(extraReqs.values())))
